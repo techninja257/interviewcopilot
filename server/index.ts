@@ -1,25 +1,31 @@
 import dotenv from 'dotenv';
-
-// .env is the single source of truth for provider credentials. A key that is
-// only exported in the developer's shell (a stale ANTHROPIC_API_KEY, say)
-// would otherwise silently outrank .env and point the app at the wrong
-// provider — so clear the ambient ones first, then load .env over the top.
-for (const name of [
-  'GROQ_API_KEY',
-  'GEMINI_API_KEY',
-  'GOOGLE_API_KEY',
-  'ANTHROPIC_API_KEY',
-  'LLM_PROVIDER',
-  'GROQ_MODEL',
-  'GEMINI_MODEL',
-  'ANTHROPIC_MODEL',
-]) {
-  delete process.env[name];
-}
-dotenv.config({ override: true });
-
 import fs from 'node:fs';
 import path from 'node:path';
+
+const ENV_PATH = path.resolve(process.cwd(), '.env');
+
+// .env is the single source of truth for provider credentials LOCALLY. A key
+// that is only exported in the developer's shell (a stale ANTHROPIC_API_KEY,
+// say) would otherwise silently outrank .env and point the app at the wrong
+// provider — so clear the ambient ones first, then load .env over the top.
+// On a host like Render there is no .env file at all; the platform injects
+// keys straight into process.env, so this guard must not run there — it
+// would delete the real key and have nothing to reload it from.
+if (fs.existsSync(ENV_PATH)) {
+  for (const name of [
+    'GROQ_API_KEY',
+    'GEMINI_API_KEY',
+    'GOOGLE_API_KEY',
+    'ANTHROPIC_API_KEY',
+    'LLM_PROVIDER',
+    'GROQ_MODEL',
+    'GEMINI_MODEL',
+    'ANTHROPIC_MODEL',
+  ]) {
+    delete process.env[name];
+  }
+  dotenv.config({ override: true });
+}
 import express from 'express';
 import { resolveProvider, type Provider } from './providers';
 
@@ -27,7 +33,6 @@ const app = express();
 app.use(express.json({ limit: '2mb' }));
 
 const PORT = Number(process.env.PORT ?? 8787);
-const ENV_PATH = path.resolve(process.cwd(), '.env');
 
 let provider: Provider | null = resolveProvider();
 
