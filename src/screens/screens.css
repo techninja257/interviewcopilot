@@ -1,0 +1,989 @@
+/* ---------- Split layout (Steps 1 & 4) ---------- */
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  gap: var(--lg);
+  align-items: start;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+.split--wide {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+}
+.split-preview {
+  position: sticky;
+  top: 0;
+  height: calc(100vh - var(--topbar-height) - var(--xl) - var(--xxl));
+  min-height: 460px;
+}
+
+.screen-head {
+  margin-bottom: var(--lg);
+}
+.screen-title {
+  font-size: var(--headline-md);
+  font-weight: 600;
+  margin-bottom: var(--xs);
+}
+.screen-sub {
+  font-size: var(--body-sm);
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+  max-width: 60ch;
+}
+
+.form-card {
+  padding: var(--lg);
+}
+.form-card > .field:last-of-type {
+  margin-bottom: var(--md);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sm);
+}
+
+.text-link {
+  display: block;
+  width: 100%;
+  margin-top: var(--md);
+  font-size: var(--label-sm);
+  color: var(--on-surface-variant);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-align: center;
+}
+.text-link:hover {
+  color: var(--abyssal-blue);
+}
+
+.inline-error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sm);
+  padding: 10px var(--md);
+  margin-bottom: var(--md);
+  border-radius: var(--radius-lg);
+  background: var(--error-container);
+  color: var(--on-error-container);
+  font-size: var(--body-sm);
+  line-height: 1.55;
+}
+.inline-error .material-symbols-outlined {
+  font-size: 18px;
+  margin-top: 1px;
+}
+
+/* Preview peek cards */
+.peek {
+  display: flex;
+  gap: 10px;
+  padding: var(--sm) 12px;
+  background: var(--surface);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  animation: fadeUp var(--normal) var(--ease) both;
+}
+.peek-num {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: var(--radius);
+  background: var(--surface-container);
+  color: var(--blue-fantastic);
+  font-size: 11px;
+  font-weight: 600;
+}
+.peek-q {
+  font-size: var(--body-sm);
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--abyssal-blue);
+}
+.peek-meta {
+  font-size: 11px;
+  color: var(--outline);
+  margin-top: 2px;
+}
+.peek-more {
+  font-size: var(--label-sm);
+  color: var(--outline);
+  text-align: center;
+  padding: var(--xs);
+}
+
+/* ---------- Briefing pack document ---------- */
+.doc {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lg);
+}
+
+.doc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sm);
+  justify-content: flex-end;
+}
+
+.role-card {
+  background: var(--surface);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  padding: var(--lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+}
+.role-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--md);
+}
+.role-title {
+  font-size: var(--headline-md);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.role-sub {
+  font-size: var(--body-sm);
+  color: var(--on-surface-variant);
+  margin-top: var(--xs);
+}
+.role-card-section {
+  padding-top: var(--md);
+  border-top: 1px solid var(--surface-variant);
+}
+.role-card-section .eyebrow {
+  margin-bottom: var(--sm);
+}
+
+.doc-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+}
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--md);
+  flex-wrap: wrap;
+  padding-bottom: var(--sm);
+  border-bottom: 1px solid var(--oatmeal);
+}
+.section-title {
+  font-size: var(--headline-sm);
+  font-weight: 600;
+}
+.section-note {
+  font-size: var(--label-sm);
+  color: var(--outline);
+}
+
+.qstack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+}
+
+.doc-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--md);
+  padding-top: var(--lg);
+  border-top: 1px solid var(--oatmeal);
+}
+
+/* ---------- Generation blocker ----------
+   Sits above the candidate drawer (z-index 40) because the form renders inside
+   it as well as on its own page. Blocks pointer input outright rather than
+   relying on each field's disabled state. */
+.gen-blocker {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: var(--lg);
+  background: rgba(27, 38, 50, 0.42);
+  backdrop-filter: blur(3px);
+  animation: fadeIn var(--fast) var(--ease);
+}
+.gen-blocker-card {
+  width: min(420px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sm);
+  padding: var(--xl) var(--lg);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+.gen-blocker-card .spinner {
+  width: 30px;
+  height: 30px;
+  border-width: 3px;
+  margin-bottom: var(--xs);
+}
+.gen-blocker-title {
+  font-size: var(--body-md);
+  font-weight: 600;
+  color: var(--abyssal-blue);
+}
+.gen-blocker-sub {
+  font-size: var(--label-md);
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+}
+
+/* ---------- Candidate drawer ---------- */
+.drawer-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(27, 38, 50, 0.35);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: flex-end;
+  animation: fadeIn var(--fast) var(--ease);
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+.drawer {
+  width: min(520px, 100%);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--palladian);
+  border-left: 1px solid var(--outline-variant);
+  box-shadow: var(--shadow-raised);
+  animation: slideIn var(--normal) var(--ease);
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+}
+.drawer-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--md);
+  padding: var(--lg);
+  background: var(--surface);
+  border-bottom: 1px solid var(--outline-variant);
+}
+.drawer-title {
+  font-size: var(--headline-sm);
+  font-weight: 600;
+}
+.drawer-sub {
+  font-size: var(--body-sm);
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+  margin-top: var(--xs);
+}
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--lg);
+}
+.dropzone {
+  display: flex;
+  align-items: center;
+  gap: var(--sm);
+  padding: var(--md);
+  border: 1px dashed var(--oatmeal);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--on-surface-variant);
+  font-size: var(--label-md);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+.dropzone:hover,
+.dropzone:focus-visible {
+  border-color: var(--burning-flame);
+  background: var(--flame-subtle);
+}
+.dropzone--over {
+  border-color: var(--burning-flame);
+  border-style: solid;
+  background: var(--flame-subtle);
+}
+.dropzone--busy {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.drawer-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sm);
+  padding: var(--md) var(--lg);
+  background: var(--surface);
+  border-top: 1px solid var(--outline-variant);
+}
+
+/* ---------- Candidate tailoring (shared by the drawer and the step) ---------- */
+.candidate-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+}
+.candidate-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sm);
+  margin-top: var(--lg);
+  padding-top: var(--md);
+  border-top: 1px solid var(--outline-variant);
+}
+
+/* The standalone step: a single centred column, like the role setup form. */
+.candidate-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--lg);
+}
+.candidate-intro {
+  margin-bottom: var(--lg);
+}
+.candidate-intro h2 {
+  font-size: var(--headline-sm);
+  margin-bottom: var(--xs);
+}
+.candidate-intro p {
+  font-size: var(--body-sm);
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+}
+/* Existing probes, so the step shows state rather than just a blank form. */
+.candidate-existing {
+  margin-bottom: var(--lg);
+  padding: var(--md);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.candidate-existing-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sm);
+  margin-bottom: var(--sm);
+}
+.candidate-existing ul {
+  margin: 0;
+  padding-left: var(--md);
+  font-size: var(--body-sm);
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+}
+
+/* ---------- Feedback ---------- */
+.score-value {
+  font-size: var(--label-sm);
+  color: var(--outline);
+  font-variant-numeric: tabular-nums;
+}
+.score-head-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sm);
+  margin-bottom: var(--xs);
+}
+.score-progress {
+  font-size: var(--label-sm);
+  color: var(--outline);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Per-question scoring ---------- */
+.qscore-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+}
+.qscore {
+  padding: var(--md);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  background: var(--surface-container-low);
+}
+.qscore-head {
+  display: flex;
+  gap: var(--sm);
+  margin-bottom: var(--sm);
+}
+.qscore-num {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  background: var(--flame-subtle);
+  color: var(--abyssal-blue);
+  font-size: var(--label-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.qscore-q {
+  font-size: var(--body-sm);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--abyssal-blue);
+}
+.qscore-meta {
+  margin-top: 2px;
+  font-size: var(--label-sm);
+  color: var(--outline);
+}
+.qscore-rubric {
+  margin-bottom: var(--sm);
+  font-size: var(--label-sm);
+}
+.qscore-rubric summary {
+  cursor: pointer;
+  color: var(--on-surface-variant);
+  padding: var(--xs) 0;
+}
+.qscore-rubric summary:hover {
+  color: var(--abyssal-blue);
+}
+.qscore-rubric dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--xs) var(--sm);
+  margin: var(--xs) 0 0;
+  padding-left: var(--sm);
+  border-left: 2px solid var(--flame-border);
+}
+.qscore-rubric dt {
+  font-weight: 600;
+  color: var(--burning-flame);
+  font-variant-numeric: tabular-nums;
+}
+.qscore-rubric dd {
+  margin: 0;
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+}
+.qscore-rubric ul {
+  margin: var(--xs) 0 0;
+  padding-left: calc(var(--md) + var(--xs));
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+}
+/* Anchored 1–5 scale. The three rubric-defined levels are visually heavier
+   than the two in-between positions, so the control reads as "which written
+   description matched" rather than as an undifferentiated rating. */
+/* Stacked, not inline: this sits in the ~300px guide pane, where a row of
+   buttons plus a legend would wrap awkwardly. */
+.scorescale {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--xs);
+}
+
+.scorescale-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.scorebtn {
+  height: 44px;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--on-surface-variant);
+  font-family: var(--font);
+  font-size: var(--body-md);
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+.scorebtn--anchor {
+  font-weight: 600;
+  color: var(--on-surface);
+  border-color: var(--outline);
+}
+
+.scorebtn:hover {
+  background: var(--surface-container-low);
+}
+
+.scorebtn--on,
+.scorebtn--on:hover {
+  background: var(--burning-flame);
+  border-color: var(--burning-flame);
+  color: var(--on-surface);
+  font-weight: 600;
+}
+
+.scorescale-legend {
+  margin: 0;
+  font-size: var(--body-sm);
+  color: var(--on-surface-variant);
+}
+
+/* Warning, not a block: the score still applies, the gap is just named. */
+.qscore-warn {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--xs);
+  margin: var(--sm) 0 0;
+  padding: var(--sm);
+  border-radius: var(--radius-lg);
+  background: var(--warning-container);
+  font-size: var(--label-md);
+  line-height: 1.45;
+  color: var(--on-surface);
+}
+
+.qscore-warn .material-symbols-outlined {
+  font-size: 18px;
+  color: var(--warning);
+  flex-shrink: 0;
+}
+
+
+/* ---------- Interview (step 4) ---------- */
+.interview {
+  max-width: 1180px;
+  margin: 0 auto;
+  /* No top padding: the sticky bar provides its own, and the space saved is
+     what brings the Previous/Next controls into the first screenful. */
+  padding: 0 var(--lg) var(--lg);
+}
+/* Pinned to the very top of the scroll container and pulled up through the
+   container's own padding, so it reads as part of the chrome rather than as a
+   card floating in the content. Full-bleed with a bottom rule instead of a
+   rounded border — content scrolls *under* it cleanly. Keeping it shallow is
+   the point: it buys the vertical space that puts Previous/Next on screen
+   without scrolling. */
+.interview-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--md);
+  padding: var(--sm) 0;
+  /* Pull up through .main-scroll's top padding so the bar sits flush against
+     the topbar. Horizontally it stays within the content column: .interview is
+     centred with max-width, so a fixed negative margin cannot reach the true
+     viewport edges without hardcoding the centring gutter. */
+  margin: calc(var(--xl) * -1) 0 var(--md);
+  background: var(--surface);
+  /* Two spreads instead of a border: the outer one paints the divider line and
+     the inner one paints the background over the gutters, so both extend past
+     the centred content column and nothing shows through as the page scrolls
+     under the bar. */
+  box-shadow:
+    0 0 0 100vmax var(--surface),
+    0 1px 0 100vmax var(--outline-variant);
+  clip-path: inset(0 -100vmax -1px -100vmax);
+  position: sticky;
+  top: calc(var(--xl) * -1);
+  z-index: 5;
+}
+.interview-who {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--label-sm);
+  color: var(--outline);
+}
+.interview-who strong {
+  font-size: var(--body-sm);
+  color: var(--abyssal-blue);
+}
+
+/* Question on the left, the rubric it is scored against on the right. */
+.interview-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  gap: var(--lg);
+  align-items: start;
+}
+.interview-guide {
+  position: sticky;
+  /* Clears the sticky bar, which now sits flush at the top of the scroller. */
+  top: var(--md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+}
+/* The score control leads the pane, so it gets the accent border — it is the
+   one thing here the interviewer acts on rather than reads. */
+.guide-block--score {
+  border-color: var(--flame-border);
+}
+.guide-block {
+  padding: var(--md);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.guide-block--flags {
+  background: var(--flame-subtle);
+  border-color: var(--flame-border);
+}
+.guide-block .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--xs);
+  margin-bottom: var(--sm);
+}
+.guide-block .eyebrow .material-symbols-outlined {
+  font-size: 16px;
+}
+.guide-rubric {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--sm);
+  margin: 0;
+  font-size: var(--label-md);
+}
+.guide-rubric dt {
+  font-weight: 600;
+  color: var(--burning-flame);
+  font-variant-numeric: tabular-nums;
+}
+.guide-rubric dd {
+  margin: 0;
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+}
+.guide-list {
+  margin: 0;
+  padding-left: var(--md);
+  font-size: var(--label-md);
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+}
+.guide-list li + li {
+  margin-top: var(--xs);
+}
+
+@media (max-width: 1000px) {
+  .interview-split {
+    grid-template-columns: 1fr;
+  }
+  .interview-guide {
+    position: static;
+    max-height: none;
+    order: -1;
+  }
+}
+
+.qstage {
+  padding: var(--lg);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.qstage-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sm);
+  margin-bottom: var(--sm);
+}
+.qstage-count {
+  font-size: var(--label-sm);
+  font-weight: 600;
+  color: var(--burning-flame);
+}
+.qstage-meta {
+  font-size: var(--label-sm);
+  color: var(--outline);
+}
+.qstage-q {
+  font-size: var(--headline-sm);
+  line-height: 1.4;
+  color: var(--abyssal-blue);
+  margin-bottom: var(--md);
+}
+.interview-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--md);
+  margin-top: var(--md);
+}
+.interview-dots {
+  display: flex;
+  gap: var(--xs);
+}
+.idot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  cursor: pointer;
+}
+.idot--done {
+  background: var(--flame-border);
+  border-color: var(--burning-flame);
+}
+.idot--active {
+  background: var(--burning-flame);
+  border-color: var(--burning-flame);
+  transform: scale(1.35);
+}
+
+/* ---------- Assessment (step 5) ---------- */
+/* Wide enough for the notes-plus-evidence split to sit side by side inside a
+   card. Widening only that one card instead left it visibly out of line with
+   the cards above and below it, which read as a layout bug rather than as
+   emphasis — so the whole column carries the width and everything aligns. */
+.assessment {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: var(--lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lg);
+}
+.assessment .form-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+}
+
+/* ---------- Final notes, with verbatim evidence alongside ---------- */
+/* The evidence is read-only recall, deliberately not prefilled into the box:
+   the consistency check compares two independently written things, and
+   deriving the summary from the evidence would erase that signal. */
+.notes-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.8fr);
+  gap: var(--lg);
+  align-items: start;
+}
+.notes-write {
+  min-width: 0;
+}
+.notes-evidence {
+  min-width: 0;
+  padding: var(--md);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  background: var(--surface-container-low);
+  max-height: 460px;
+  overflow-y: auto;
+}
+.notes-evidence .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--xs);
+  margin-bottom: var(--sm);
+}
+.notes-evidence .eyebrow .material-symbols-outlined {
+  font-size: 16px;
+}
+.notes-empty {
+  font-size: var(--label-md);
+  color: var(--outline);
+  line-height: 1.5;
+}
+.notes-recall {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+}
+.recall-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--xs);
+  flex-wrap: wrap;
+  margin-bottom: 2px;
+}
+.recall-num {
+  font-size: var(--label-sm);
+  font-weight: 700;
+  color: var(--abyssal-blue);
+}
+.recall-comp {
+  font-size: var(--label-sm);
+  color: var(--outline);
+  flex: 1;
+  min-width: 0;
+}
+.recall-score {
+  font-size: var(--label-sm);
+  font-weight: 600;
+  color: var(--burning-flame);
+  font-variant-numeric: tabular-nums;
+}
+.recall-score--none {
+  color: var(--outline);
+  font-weight: 400;
+}
+.recall-quote {
+  margin: 0;
+  padding-left: var(--sm);
+  border-left: 2px solid var(--flame-border);
+  font-size: var(--label-md);
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+  white-space: pre-wrap;
+}
+.recall-quote--empty {
+  border-left-color: var(--outline-variant);
+  color: var(--outline);
+  font-style: italic;
+}
+
+@media (max-width: 1100px) {
+  .notes-split {
+    grid-template-columns: 1fr;
+  }
+  .notes-evidence {
+    max-height: 300px;
+  }
+}
+
+/* ---------- Derived competency rollup ---------- */
+.rollup {
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.rollup-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sm);
+  padding: var(--sm) var(--md);
+  background: var(--surface);
+  font-size: var(--body-sm);
+}
+.rollup-row + .rollup-row {
+  border-top: 1px solid var(--outline-variant);
+}
+.rollup-name {
+  color: var(--abyssal-blue);
+}
+.rollup-score {
+  color: var(--on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+.rollup-count {
+  color: var(--outline);
+  font-size: var(--label-sm);
+}
+
+.rec-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--sm);
+}
+.rec {
+  padding: 11px var(--md);
+  font-size: var(--label-md);
+  font-weight: 500;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--outline-variant);
+  background: var(--surface);
+  color: var(--on-surface-variant);
+  transition: all var(--fast) var(--ease);
+}
+.rec:hover {
+  border-color: var(--blue-fantastic);
+  color: var(--abyssal-blue);
+}
+.rec--active {
+  background: var(--blue-fantastic);
+  border-color: var(--blue-fantastic);
+  color: var(--on-primary);
+}
+
+.panel {
+  padding: var(--md);
+  background: var(--surface);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+}
+.panel .eyebrow {
+  margin-bottom: var(--sm);
+}
+.panel-text {
+  font-size: var(--body-sm);
+  line-height: 1.65;
+  color: var(--on-surface-variant);
+  margin-bottom: var(--sm);
+}
+
+/* Standing reminder that the hiring call belongs to the interviewer. */
+.panel-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--xs, 6px);
+  margin-top: var(--md);
+  padding-top: var(--sm);
+  border-top: 1px solid var(--surface-variant);
+  font-size: var(--label-sm);
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+}
+.panel-note .material-symbols-outlined {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .split,
+  .split--wide {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .split-preview {
+    position: static;
+    height: auto;
+    min-height: 380px;
+  }
+}
+
+@media (max-width: 640px) {
+  .rec-row {
+    grid-template-columns: 1fr;
+  }
+  .doc-actions {
+    justify-content: stretch;
+  }
+  .doc-actions .btn {
+    flex: 1;
+  }
+  .doc-foot {
+    flex-direction: column-reverse;
+  }
+}

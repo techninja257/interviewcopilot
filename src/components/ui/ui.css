@@ -1,0 +1,372 @@
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sm);
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: background var(--fast) var(--ease), border-color var(--fast) var(--ease),
+    color var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+.btn--sm {
+  padding: 6px 12px;
+  font-size: var(--label-sm);
+}
+.btn--md {
+  padding: 10px 18px;
+  font-size: var(--label-md);
+}
+.btn--lg {
+  padding: 14px 24px;
+  font-size: var(--body-md);
+}
+.btn--full {
+  width: 100%;
+}
+
+.btn--primary {
+  background: var(--blue-fantastic);
+  color: var(--on-primary);
+}
+.btn--primary:not(:disabled):hover {
+  background: var(--abyssal-blue);
+}
+
+.btn--secondary {
+  background: var(--surface);
+  color: var(--abyssal-blue);
+  border: 1px solid var(--outline-variant);
+}
+.btn--secondary:not(:disabled):hover {
+  border-color: var(--blue-fantastic);
+  background: var(--surface-container-low);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--on-surface-variant);
+}
+.btn--ghost:not(:disabled):hover {
+  background: var(--ink-subtle);
+  color: var(--abyssal-blue);
+}
+
+.btn--danger {
+  background: transparent;
+  color: var(--error);
+  border: 1px solid var(--error-container);
+}
+.btn--danger:not(:disabled):hover {
+  background: var(--error-container);
+}
+
+/* ---------- Form controls ---------- */
+.control {
+  width: 100%;
+  padding: 11px 14px;
+  font-size: var(--body-sm);
+  background: var(--surface);
+  color: var(--abyssal-blue);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
+}
+.control::placeholder {
+  color: var(--outline);
+}
+.control:hover:not(:focus) {
+  border-color: var(--oatmeal);
+}
+.control:focus {
+  outline: none;
+  border-color: var(--burning-flame);
+  box-shadow: 0 0 0 3px var(--flame-subtle);
+}
+.control--error {
+  border-color: var(--error);
+}
+.control--area {
+  min-height: 96px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.field-error {
+  margin-top: var(--xs);
+  font-size: var(--label-sm);
+  color: var(--error);
+}
+
+.select-wrap {
+  position: relative;
+}
+.control--select {
+  appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+}
+.select-chevron {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--on-surface-variant);
+}
+
+/* ---------- Chips ---------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  font-size: var(--label-sm);
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--outline-variant);
+  background: var(--surface);
+  color: var(--on-surface-variant);
+  transition: all var(--fast) var(--ease);
+}
+button.chip:hover {
+  border-color: var(--blue-fantastic);
+  color: var(--abyssal-blue);
+}
+.chip--selected {
+  background: var(--blue-fantastic);
+  border-color: var(--blue-fantastic);
+  color: var(--on-primary);
+}
+button.chip--selected:hover {
+  background: var(--abyssal-blue);
+  color: var(--on-primary);
+}
+.chip--flame {
+  background: var(--flame-subtle);
+  border-color: var(--flame-border);
+  color: #7a4a12;
+}
+.chip--success {
+  background: var(--success-container);
+  border-color: transparent;
+  color: var(--success);
+}
+.chip--warning {
+  background: var(--warning-container);
+  border-color: transparent;
+  color: var(--warning);
+}
+.chip--danger {
+  background: var(--error-container);
+  border-color: transparent;
+  color: var(--on-error-container);
+}
+.chip .material-symbols-outlined {
+  font-size: 15px;
+}
+.chip-remove {
+  display: inline-flex;
+  cursor: pointer;
+  opacity: 0.6;
+}
+.chip-remove:hover {
+  opacity: 1;
+}
+
+/* ---------- Segmented control ---------- */
+.segmented {
+  display: inline-flex;
+  padding: 3px;
+  gap: 2px;
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  flex-wrap: wrap;
+}
+.segmented-item {
+  padding: 7px 14px;
+  font-size: var(--label-sm);
+  font-weight: 500;
+  border-radius: 3px;
+  color: var(--on-surface-variant);
+  transition: all var(--fast) var(--ease);
+}
+.segmented-item:hover:not(.is-active) {
+  background: var(--surface);
+  color: var(--abyssal-blue);
+}
+.segmented-item.is-active {
+  background: var(--blue-fantastic);
+  color: var(--on-primary);
+}
+
+/* ---------- Slider ---------- */
+.slider-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--sm);
+}
+.slider-value {
+  font-size: var(--body-md);
+  font-weight: 600;
+  color: var(--abyssal-blue);
+  font-variant-numeric: tabular-nums;
+}
+.slider {
+  width: 100%;
+  height: 4px;
+  appearance: none;
+  background: var(--surface-dim);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--burning-flame);
+  border: 3px solid var(--surface);
+  box-shadow: 0 1px 4px rgba(27, 38, 50, 0.25);
+  transition: transform var(--fast) var(--ease);
+}
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+.slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--burning-flame);
+  border: 3px solid var(--surface);
+  box-shadow: 0 1px 4px rgba(27, 38, 50, 0.25);
+}
+
+/* ---------- Stars ---------- */
+.stars {
+  display: inline-flex;
+  gap: 2px;
+}
+.star {
+  display: inline-flex;
+  padding: 2px;
+  color: var(--outline-variant);
+  transition: color var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+.star:hover {
+  transform: scale(1.15);
+}
+.star--on {
+  color: var(--burning-flame);
+}
+.star .material-symbols-outlined {
+  font-size: 22px;
+}
+
+/* ---------- Callout ---------- */
+.callout {
+  display: flex;
+  gap: var(--md);
+  padding: var(--md);
+  border-radius: var(--radius-xl);
+  border: 1px solid;
+}
+.callout--info {
+  background: var(--surface-container-low);
+  border-color: var(--surface-variant);
+}
+.callout--warning {
+  background: var(--flame-subtle);
+  border-color: var(--flame-border);
+}
+.callout--danger {
+  background: var(--error-container);
+  border-color: rgba(186, 26, 26, 0.25);
+}
+.callout--success {
+  background: var(--success-container);
+  border-color: rgba(47, 106, 74, 0.25);
+}
+.callout-icon {
+  font-size: 22px;
+  margin-top: 1px;
+}
+.callout--warning .callout-icon {
+  color: #a4671b;
+}
+.callout--danger .callout-icon {
+  color: var(--error);
+}
+.callout--success .callout-icon {
+  color: var(--success);
+}
+.callout--info .callout-icon {
+  color: var(--blue-fantastic);
+}
+.callout-title {
+  font-size: var(--body-sm);
+  font-weight: 600;
+  margin-bottom: var(--xs);
+}
+.callout-content {
+  font-size: var(--body-sm);
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+}
+.callout-content ul {
+  margin-top: var(--sm);
+  padding-left: 18px;
+  list-style: disc;
+}
+.callout-content li {
+  margin-bottom: 2px;
+}
+
+/* ---------- Empty state ---------- */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--xxl) var(--lg);
+  height: 100%;
+}
+.empty-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  margin-bottom: var(--md);
+  animation: shimmer 3s var(--ease) infinite;
+}
+.empty-icon .material-symbols-outlined {
+  font-size: 26px;
+  color: var(--blue-fantastic);
+}
+.empty-title {
+  font-size: var(--body-md);
+  font-weight: 600;
+  margin-bottom: var(--xs);
+}
+.empty-text {
+  font-size: var(--body-sm);
+  color: var(--on-surface-variant);
+  max-width: 34ch;
+  line-height: 1.6;
+}

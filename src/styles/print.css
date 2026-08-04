@@ -1,0 +1,186 @@
+/*
+ * Print stylesheet — the briefing pack's export path. The browser's own
+ * "Save as PDF" produces selectable text and correct page breaks, which
+ * a canvas-rasterizing PDF library does not.
+ */
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm 14mm;
+  }
+
+  html,
+  body,
+  #root {
+    height: auto;
+    overflow: visible;
+    background: #fff;
+  }
+
+  body {
+    font-size: 10.5pt;
+    color: #000;
+  }
+
+  /* Chrome only — everything but the document itself */
+  .sidebar,
+  .topbar,
+  .no-print,
+  .drawer-scrim,
+  .qcard-actions,
+  .doc-foot {
+    display: none !important;
+  }
+
+  .shell,
+  .main {
+    display: block;
+    height: auto;
+    overflow: visible;
+  }
+
+  .main-scroll {
+    padding: 0;
+    overflow: visible;
+  }
+
+  .doc {
+    max-width: none;
+    gap: 10pt;
+  }
+
+  .role-card,
+  .callout {
+    padding: 10pt 12pt;
+  }
+  .qcard-head {
+    padding: 10pt 10pt 8pt;
+  }
+  .qcard-body {
+    padding: 0 10pt 8pt;
+    gap: 8pt;
+  }
+  /* The printed guide is the full guide regardless of what is collapsed on
+     screen — collapsing is a reading aid, not an export filter. */
+  .qcard-body--collapsed {
+    display: flex !important;
+  }
+  .qblock {
+    padding-top: 8pt;
+  }
+
+  /* Flatten decoration that costs ink and adds nothing on paper */
+  .card,
+  .role-card,
+  .qcard,
+  .panel,
+  .callout {
+    box-shadow: none !important;
+    border-color: #ccc !important;
+    background: #fff !important;
+  }
+
+  /*
+   * A question card is one unit — splitting a rubric across a page boundary
+   * is worse than a short page. Cards taller than a page fall back to
+   * breaking rather than overflowing (`auto` on the inner blocks).
+   */
+  .qcard {
+    border-radius: 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    padding-bottom: 4pt;
+  }
+  .qcard-body {
+    break-inside: auto;
+  }
+
+  /*
+   * Page 1 is the cover: role summary + compliance reminder. Question cards
+   * are ~430pt tall and avoid internal breaks, so none would fit in the
+   * remainder anyway — making the break explicit means page 1 reads as a
+   * deliberate standalone brief rather than a page that ran out of room.
+   */
+  .doc-section:first-of-type {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .qcard-rail {
+    background: #000 !important;
+    width: 2px;
+  }
+
+  .qcard-num {
+    background: #eee !important;
+    color: #000 !important;
+  }
+
+  .evidence {
+    background: #f6f6f6 !important;
+    border-left-color: #666 !important;
+    page-break-inside: avoid;
+  }
+
+  /*
+   * Only the section heading avoids a break after it. Putting the same rule on
+   * the role card forces the first question onto page 2 and wastes half of
+   * page 1 — a guide the interviewer prints should not open on white space.
+   */
+  .section-head {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  .role-card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .doc-section {
+    page-break-inside: auto;
+  }
+
+  .callout {
+    page-break-inside: avoid;
+    border: 1px solid #999 !important;
+  }
+
+  .chip {
+    border: 1px solid #999 !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .stats {
+    background: #fff !important;
+    border: 1px solid #ccc !important;
+  }
+
+  .rubric-score {
+    border: 1px solid #666 !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .material-symbols-outlined {
+    display: none;
+  }
+
+  /* A printed guide has a scoring column; the screen version doesn't need one */
+  .qcard-foot::after {
+    content: 'Score: 1  2  3  4  5          Notes: ________________________________';
+    display: block;
+    width: 100%;
+    margin-top: 6pt;
+    padding-top: 6pt;
+    border-top: 1px dashed #bbb;
+    font-size: 9pt;
+    letter-spacing: 0.02em;
+    color: #333;
+  }
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+}

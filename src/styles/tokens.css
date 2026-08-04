@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+:root {
+  /* Core palette — from the Stitch screen designs */
+  --palladian: #eee9df;
+  --oatmeal: #c9c1b1;
+  --blue-fantastic: #2c3b4d;
+  --abyssal-blue: #1b2632;
+  --burning-flame: #ffb162;
+
+  /* Surfaces */
+  --surface: #ffffff;
+  --surface-container: #e4efff;
+  --surface-container-low: #eef4ff;
+  --surface-variant: #d8e3f4;
+  --surface-dim: #d0dbeb;
+
+  /* Text */
+  --on-surface: #111c28;
+  --on-surface-variant: #44474c;
+  --on-primary: #ffffff;
+  --outline: #74777d;
+  --outline-variant: #c4c6cd;
+
+  /* Semantic */
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+  --success: #2f6a4a;
+  --success-container: #d5ebdd;
+  --warning: #8b5003;
+  --warning-container: #ffdcbf;
+
+  /* Accent tints */
+  --flame-subtle: rgba(255, 177, 98, 0.16);
+  --flame-border: rgba(255, 177, 98, 0.45);
+  --ink-subtle: rgba(27, 38, 50, 0.06);
+  --ink-border: rgba(27, 38, 50, 0.12);
+
+  /* Type — Lexend throughout */
+  --font: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --display-lg: 48px;
+  --headline-lg: 32px;
+  --headline-md: 24px;
+  --headline-sm: 20px;
+  --body-lg: 18px;
+  --body-md: 16px;
+  --body-sm: 14px;
+  --label-md: 14px;
+  --label-sm: 12px;
+
+  /* Spacing — 4px base */
+  --xs: 4px;
+  --sm: 8px;
+  --md: 16px;
+  --lg: 24px;
+  --xl: 32px;
+  --xxl: 48px;
+  --gutter: 24px;
+  --margin-desktop: 40px;
+  --margin-mobile: 16px;
+  --max-width: 1440px;
+
+  /* Radii — Stitch's scale is deliberately square */
+  --radius: 2px;
+  --radius-lg: 4px;
+  --radius-xl: 8px;
+  --radius-full: 12px;
+  --radius-pill: 999px;
+
+  /* Elevation — depth comes from white-on-cream, not shadow */
+  --shadow-card: 0 4px 12px rgba(27, 38, 50, 0.05);
+  --shadow-raised: 0 8px 24px rgba(27, 38, 50, 0.1);
+
+  /* Motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --fast: 150ms;
+  --normal: 250ms;
+
+  /* Layout */
+  --sidebar-width: 260px;
+  --topbar-height: 64px;
+  --content-max: 900px;
+}

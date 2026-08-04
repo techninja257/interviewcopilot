@@ -1,0 +1,456 @@
+/* ---------- Question card ---------- */
+.qcard {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
+  animation: fadeUp var(--normal) var(--ease) both;
+}
+.qcard:hover {
+  border-color: var(--oatmeal);
+}
+.qcard-rail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--blue-fantastic);
+}
+.qcard--personalized .qcard-rail {
+  background: var(--burning-flame);
+}
+
+.qcard-head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--md);
+  padding: var(--md) var(--md) var(--md) calc(var(--md) + 3px);
+}
+.qcard-num {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: var(--radius-lg);
+  background: var(--surface-container);
+  color: var(--blue-fantastic);
+  font-size: var(--label-md);
+  font-weight: 600;
+}
+.qcard--personalized .qcard-num {
+  background: var(--flame-subtle);
+  color: #7a4a12;
+}
+.qcard-headtext {
+  flex: 1;
+  min-width: 0;
+}
+.qcard-question {
+  font-size: var(--body-md);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--abyssal-blue);
+}
+.qcard-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
+  font-size: var(--label-sm);
+  color: var(--outline);
+}
+.qcard-competency {
+  font-weight: 500;
+  color: var(--on-surface-variant);
+}
+.qcard-dot {
+  opacity: 0.5;
+}
+.qcard-tag-personalized {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: #7a4a12;
+  font-weight: 500;
+}
+.qcard-tag-personalized .material-symbols-outlined {
+  font-size: 14px;
+}
+
+.qcard-actions {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-lg);
+  color: var(--outline);
+  transition: all var(--fast) var(--ease);
+}
+.icon-btn:hover {
+  background: var(--ink-subtle);
+  color: var(--abyssal-blue);
+}
+.chevron .material-symbols-outlined {
+  transition: transform var(--normal) var(--ease);
+}
+.chevron--open .material-symbols-outlined {
+  transform: rotate(180deg);
+}
+
+.qcard-body {
+  padding: 0 var(--md) var(--md) calc(var(--md) + 3px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+}
+.qblock {
+  padding-top: var(--md);
+  border-top: 1px solid var(--surface-variant);
+}
+.qblock--why {
+  border-top-color: var(--outline-variant);
+}
+.qblock-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--label-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  margin-bottom: var(--sm);
+}
+.qblock-title .material-symbols-outlined {
+  font-size: 16px;
+}
+.qblock-title--warn {
+  color: #8b5003;
+}
+.qblock-text {
+  font-size: var(--body-sm);
+  line-height: 1.65;
+  color: var(--on-surface-variant);
+}
+
+.evidence {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: var(--sm);
+  padding: 10px var(--md);
+  border-left: 2px solid var(--blue-fantastic);
+  background: var(--surface-container-low);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+.evidence--resume {
+  border-left-color: var(--burning-flame);
+  background: var(--flame-subtle);
+}
+.evidence-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--outline);
+}
+.evidence-quote {
+  font-size: var(--body-sm);
+  line-height: 1.6;
+  color: var(--abyssal-blue);
+  font-style: italic;
+}
+
+.qlist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.qlist li {
+  position: relative;
+  padding-left: 18px;
+  font-size: var(--body-sm);
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+}
+.qlist li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--oatmeal);
+}
+.qlist--warn li::before {
+  background: var(--burning-flame);
+}
+
+.rubric {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm);
+}
+.rubric-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.rubric-row p {
+  font-size: var(--body-sm);
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+}
+.rubric-score {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: var(--radius);
+  font-size: var(--label-sm);
+  font-weight: 600;
+  margin-top: 1px;
+}
+.rubric-score--low {
+  background: var(--error-container);
+  color: var(--on-error-container);
+}
+.rubric-score--mid {
+  background: var(--surface-variant);
+  color: var(--blue-fantastic);
+}
+.rubric-score--high {
+  background: var(--success-container);
+  color: var(--success);
+}
+
+.qcard-foot {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sm) var(--md);
+  padding-top: var(--md);
+  border-top: 1px solid var(--surface-variant);
+}
+.bias-note {
+  font-size: var(--label-sm);
+  color: #8b5003;
+  flex: 1;
+  min-width: 200px;
+}
+.qcard-score {
+  display: flex;
+  align-items: center;
+  gap: var(--sm);
+  margin-left: auto;
+}
+
+/* ---------- Live preview (Step 1 right panel) ---------- */
+.preview {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.preview-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sm);
+  padding: var(--md);
+  border-bottom: 1px solid var(--outline-variant);
+  flex-shrink: 0;
+}
+.preview-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: var(--label-md);
+  font-weight: 600;
+  color: var(--abyssal-blue);
+}
+.preview-title .material-symbols-outlined {
+  font-size: 18px;
+  color: var(--blue-fantastic);
+}
+.preview-body {
+  position: relative;
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--md);
+}
+.preview-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--oatmeal) 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.preview-stack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm);
+}
+
+/* Generation progress */
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm);
+}
+.progress-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px var(--md);
+  border-radius: var(--radius-lg);
+  background: var(--surface-container-low);
+  border: 1px solid transparent;
+  font-size: var(--body-sm);
+  color: var(--outline);
+  transition: all var(--normal) var(--ease);
+}
+.progress-step.is-active {
+  background: var(--surface);
+  border-color: var(--flame-border);
+  color: var(--abyssal-blue);
+  font-weight: 500;
+}
+.progress-step.is-done {
+  color: var(--on-surface-variant);
+}
+.progress-step .material-symbols-outlined {
+  font-size: 18px;
+}
+.progress-step.is-done .material-symbols-outlined {
+  color: var(--success);
+}
+/* Hidden, not unmounted — see QuestionCard. Print re-shows it. */
+.qcard-body--collapsed {
+  display: none;
+}
+
+.spinner {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  border: 2px solid var(--surface-dim);
+  border-top-color: var(--burning-flame);
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.skeleton {
+  height: 62px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    90deg,
+    var(--surface-container-low) 25%,
+    var(--surface-variant) 50%,
+    var(--surface-container-low) 75%
+  );
+  background-size: 200% 100%;
+  animation: sweep 1.4s var(--ease) infinite;
+}
+@keyframes sweep {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* Stats bar */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--md);
+  padding: var(--sm) var(--md);
+  border-radius: var(--radius-lg);
+  background: var(--surface-container-low);
+  border: 1px solid var(--surface-variant);
+  font-size: var(--label-sm);
+  color: var(--on-surface-variant);
+}
+.stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.stat strong {
+  color: var(--abyssal-blue);
+  font-variant-numeric: tabular-nums;
+}
+.stat .material-symbols-outlined {
+  font-size: 15px;
+  color: var(--outline);
+}
+/* An ungrounded quote is a claim the source text does not support, so the
+   stat states it rather than blending into the row of neutral counts. */
+.stat--warn,
+.stat--warn strong,
+.stat--warn .material-symbols-outlined {
+  color: var(--warning);
+}
+
+/* ---------- Consistency flag ---------- */
+.flag {
+  display: flex;
+  gap: var(--md);
+  padding: var(--md);
+  border-radius: var(--radius-xl);
+  background: var(--flame-subtle);
+  border: 1px solid var(--flame-border);
+  animation: fadeUp var(--normal) var(--ease) both;
+}
+.flag-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--burning-flame);
+  color: var(--abyssal-blue);
+}
+.flag-title {
+  font-size: var(--body-sm);
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.flag-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.flag-list li {
+  font-size: var(--body-sm);
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+}

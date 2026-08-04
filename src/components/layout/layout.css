@@ -1,0 +1,414 @@
+/* ---------- Shell ---------- */
+.shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.main-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--xl) var(--margin-desktop) var(--xxl);
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-right: 1px solid var(--outline-variant);
+  overflow-y: auto;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sm);
+  padding: var(--lg) var(--md);
+  border-bottom: 1px solid var(--outline-variant);
+}
+.brand-text {
+  min-width: 0;
+}
+
+.sidebar-toggle {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding: 0;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.sidebar-toggle:hover {
+  background: var(--surface-container-low);
+  color: var(--abyssal-blue);
+}
+.sidebar-toggle .material-symbols-outlined {
+  font-size: 18px;
+}
+
+/* Collapsed by choice. Same width and hide-set as the ≤1000px breakpoint, so
+   a manual collapse and a narrow viewport produce the same rail rather than
+   two different-looking sidebars. */
+.sidebar--collapsed {
+  width: 76px;
+}
+.sidebar--collapsed .brand-text,
+.sidebar--collapsed .step-text,
+.sidebar--collapsed .recent-text,
+.sidebar--collapsed .sidebar-heading,
+.sidebar--collapsed .demo-pill,
+.sidebar--collapsed .version {
+  display: none;
+}
+.sidebar--collapsed .sidebar-brand {
+  flex-direction: column;
+  gap: var(--xs);
+  padding: var(--md) var(--sm);
+}
+.sidebar--collapsed .sidebar-toggle {
+  margin-left: 0;
+}
+.sidebar--collapsed .step,
+.sidebar--collapsed .recent {
+  justify-content: center;
+}
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: var(--radius-lg);
+  background: var(--blue-fantastic);
+  color: var(--burning-flame);
+}
+.brand-mark .material-symbols-outlined {
+  font-size: 20px;
+}
+.brand-name {
+  font-size: var(--body-md);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--abyssal-blue);
+}
+.brand-tag {
+  font-size: 11px;
+  color: var(--outline);
+  margin-top: 1px;
+}
+
+.sidebar-section {
+  padding: var(--md) var(--sm);
+  border-bottom: 1px solid var(--outline-variant);
+}
+.sidebar-heading {
+  padding: 0 var(--sm) var(--sm);
+}
+
+.steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px var(--sm);
+  border-radius: var(--radius-lg);
+  text-align: left;
+  transition: background var(--fast) var(--ease);
+}
+.step:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.step:not(:disabled):hover {
+  background: var(--surface-container-low);
+}
+.step--active {
+  background: var(--surface-container);
+}
+.step-marker {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  font-size: var(--label-sm);
+  font-weight: 600;
+  border: 1px solid var(--outline-variant);
+  color: var(--on-surface-variant);
+  background: var(--surface);
+  transition: all var(--fast) var(--ease);
+}
+.step--active .step-marker {
+  background: var(--blue-fantastic);
+  border-color: var(--blue-fantastic);
+  color: var(--on-primary);
+}
+.step--done .step-marker {
+  background: var(--burning-flame);
+  border-color: var(--burning-flame);
+  color: var(--abyssal-blue);
+}
+.step--done .step-marker .material-symbols-outlined {
+  font-size: 15px;
+}
+.step-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.step-label {
+  font-size: var(--label-md);
+  font-weight: 500;
+  color: var(--abyssal-blue);
+}
+.step-sub {
+  font-size: 11px;
+  color: var(--outline);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recents {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.recent {
+  display: flex;
+  align-items: center;
+  gap: var(--sm);
+  width: 100%;
+  padding: 7px var(--sm);
+  border-radius: var(--radius-lg);
+  text-align: left;
+  color: var(--on-surface-variant);
+}
+.recent:hover {
+  background: var(--surface-container-low);
+  color: var(--abyssal-blue);
+}
+.recent .material-symbols-outlined {
+  font-size: 17px;
+}
+.recent-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.recent-title {
+  font-size: var(--label-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.recent-date {
+  font-size: 11px;
+  color: var(--outline);
+}
+
+.sidebar-foot {
+  margin-top: auto;
+  padding: var(--md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm);
+}
+.demo-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  background: var(--flame-subtle);
+  color: #7a4a12;
+}
+.demo-pill .material-symbols-outlined {
+  font-size: 14px;
+}
+.version {
+  font-size: 11px;
+  color: var(--outline);
+}
+
+/* ---------- Top bar ---------- */
+.topbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--sm) var(--md);
+  min-height: var(--topbar-height);
+  padding: var(--md) var(--margin-desktop);
+  background: var(--surface);
+  border-bottom: 1px solid var(--outline-variant);
+  flex-shrink: 0;
+}
+
+.live-banner {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sm);
+  padding: 9px 13px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-container-low);
+  border: 1px solid var(--surface-variant);
+  font-size: var(--label-sm);
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+}
+.live-banner .material-symbols-outlined {
+  font-size: 16px;
+  color: var(--blue-fantastic);
+  margin-top: 1px;
+}
+.live-banner strong {
+  color: var(--abyssal-blue);
+  font-weight: 600;
+}
+.topbar-titles {
+  min-width: 0;
+}
+.crumbs {
+  display: flex;
+  align-items: center;
+  font-size: var(--label-sm);
+  color: var(--outline);
+  margin-bottom: 2px;
+}
+.crumb {
+  display: inline-flex;
+  align-items: center;
+}
+.crumb-sep {
+  font-size: 15px;
+  margin: 0 2px;
+}
+.crumb-current {
+  color: var(--on-surface-variant);
+  font-weight: 500;
+}
+.topbar-title {
+  font-size: var(--headline-sm);
+  font-weight: 600;
+  color: var(--abyssal-blue);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sm);
+  flex-shrink: 0;
+}
+.mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px;
+  font-size: var(--label-sm);
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--outline-variant);
+  background: var(--surface);
+  color: var(--on-surface-variant);
+  transition: all var(--fast) var(--ease);
+}
+.mode-toggle:hover:not(:disabled) {
+  border-color: var(--blue-fantastic);
+  color: var(--abyssal-blue);
+}
+.mode-toggle:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.mode-toggle .material-symbols-outlined {
+  font-size: 14px;
+}
+.mode-toggle--live {
+  background: var(--success-container);
+  border-color: transparent;
+  color: var(--success);
+}
+.mode-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--oatmeal);
+}
+.mode-dot--live {
+  background: var(--success);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+  .sidebar {
+    width: 76px;
+  }
+  /* Already a rail at this width — a collapse control would do nothing. */
+  .sidebar-toggle {
+    display: none;
+  }
+  .brand-text,
+  .brand-tag,
+  .step-text,
+  .recent-text,
+  .sidebar-heading,
+  .demo-pill,
+  .version {
+    display: none;
+  }
+  .sidebar-brand,
+  .step,
+  .recent {
+    justify-content: center;
+  }
+  .main-scroll,
+  .topbar {
+    padding-left: var(--lg);
+    padding-right: var(--lg);
+  }
+}
+
+@media (max-width: 720px) {
+  .topbar {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
+  }
+  .main-scroll,
+  .topbar {
+    padding-left: var(--margin-mobile);
+    padding-right: var(--margin-mobile);
+  }
+}
